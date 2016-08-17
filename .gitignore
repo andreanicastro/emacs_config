@@ -1,0 +1,26 @@
+#folders
+build/
+CMakeFiles/
+bin/
+lib/
+resources/
+gtest/build/
+
+
+#ignore gtags files
+GPATH
+GRTAGS
+GTAGS
+
+
+#temp files
+*~
+*/**/*~
+*/**/#*
+*/**/.#*
+
+#qtcreator files
+*.user
+
+#vocabularies
+*.voc
