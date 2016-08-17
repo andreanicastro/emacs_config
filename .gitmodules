@@ -1,0 +1,10 @@
+[submodule "snippets"]
+	   path = snippets
+	   url = https://github.com/AndreaCrotti/yasnippet-snippets.git
+	   branch = master
+
+[submodule "yasnippet"]
+	   path = plugins/yasnippet
+	   url = https://github.com/joaotavora/yasnippet.git
+	   branch = master
+	   
