@@ -1,6 +1,0 @@
-[submodule "plugins/yasnippet"]
-	path = plugins/yasnippet
-	url = https://github.com/joaotavora/yasnippet.git
-[submodule "snippets/crotti-snippets"]
-	path = snippets/crotti-snippets
-	url = https://github.com/AndreaCrotti/yasnippet-snippets.git
