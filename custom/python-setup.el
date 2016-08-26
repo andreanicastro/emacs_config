@@ -18,7 +18,12 @@
     (setq elpy-rpc-backend "jedi"
 	  elpy-rpc-project-specific 't)
     (when (fboundp 'flycheck-mode)
-      (setq elpy-modules (delete 'elpy-module-flymake elpy-modules)))))
+      (setq elpy-modules (delete 'elpy-module-flymake elpy-modules))))
+
+
+  )
+
+
 
 
 (provide 'python-setup)
