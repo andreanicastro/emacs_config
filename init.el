@@ -21,10 +21,15 @@
 ;;custom package repository
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa" . "http://stable.melpa.org/packages/") t)
+	     '("melpa" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (package-initialize)
 
-
+;; install use-package if not installed 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 ;;buffer movement
 (windmove-default-keybindings)
@@ -34,6 +39,8 @@
 (add-to-list 'load-path "~/.emacs.d/custom/")
 
 
+;; set up python
+(require 'python-setup)
 
 
 
