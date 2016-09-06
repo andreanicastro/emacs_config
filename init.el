@@ -42,6 +42,8 @@
 ;; set up python
 (require 'python-setup)
 
+;; setup org
+(require 'orgmode-setup)
 
 
 ;;force c++ mode on eigen
@@ -107,7 +109,7 @@
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
 ;;tab completion without delay
-(setq company-idle-delay 0)
+(setq company-idle-delay 0.2)
 (define-key c-mode-map [(tab)] 'company-complete)
 (define-key c++-mode-map [(tab)] 'company-complete)
 
@@ -142,3 +144,4 @@
 
 (put 'upcase-region 'disabled nil)
 (setq x-select-enable-clipboard nil)
+(put 'narrow-to-region 'disabled nil)
