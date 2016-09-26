@@ -1,80 +1,93 @@
 ;; cpp setup
 
-;;configure yasnippet 
-(add-to-list
- 'load-path "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
-
-(setq yas-snippet-dir
-      '("~/.emacs.d/snippets"))
+;;force c++ mode on eigen and cuda
+(add-to-list 'auto-mode-alist '("/eigen/Eigen/"  . c++-mode) t)
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
 
-(yas-reload-all)
-(add-hook 'prog-mode-hook #'yas-minor-mode)
+(use-package yasnippet
+  :load-path "~./.emacs.d/plugins/yasnippet"
+  :commands (yas-minor-mode)
+  :init
+  (setq yas-snippet-dir
+	'("~/.emacs.d/snippets"))
+  (progn (add-hook 'prog-mode-hook #'yas-minor-mode))
+  :config
+  (yas-reload-all)
+  )
 
 
+(use-package rtags
+  :config
+  (setq rtags-completions-enabled t)
+  (setq rtags-autostart-diagnostics t)
+  (rtags-enable-standard-keybindings)
+)
 
-;; setup rtags
-(require 'rtags)
-(require 'company-rtags)
-
-(setq rtags-completions-enabled t)
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends 'company-rtags))
-(setq rtags-autostart-diagnostics t)
-(rtags-enable-standard-keybindings)
-
-
-;;company and irony
-(require 'company-irony)
-(require 'company-irony-c-headers)
-(eval-after-load 'company
-  '(add-to-list 
-    'company-backends '(company-irony-c-headers company-irony)))
+(use-package company-rtags
+  :after rtags company
+  :config
+  (add-to-list 'company-backends 'company-rtags)
+  )
 
 
-(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+(use-package company-irony
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-irony)
+  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+  )
 
+(use-package company-irony-c-headers
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-irony-c-headers)
+  )
+  
 
-;; irony
-(require 'irony)
-;; ;; irony mode
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-
-(defun nick/irony-mode-hook ()
+(use-package irony
+  :commands (irony-mode)
+  :init
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  :config
+  ;; check correctness
   (define-key irony-mode-map [remap completion-at-point]
     'irony-completion-at-point-async)
   (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
+    'irony-completion-at-point-async)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+)
 
 
-(add-hook 'irony-mode-hook 'nick/irony-mode-hook)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-;;tab company completion without delay
-(setq company-idle-delay 0.2)
+;; company bindings
+;; not nice here, double check
 (define-key c-mode-map [(tab)] 'company-complete)
 (define-key c++-mode-map [(tab)] 'company-complete)
 
-;; flycheck
-(add-hook 'c++-mode-hook 'flycheck-mode)
-(add-hook 'c-mode-hook 'flycheck-mode)
 
+(use-package flycheck
+  :commands (flycheck-mode)
+  :init
+  (add-hook 'c++-mode-hook 'flycheck-mode)
+  (add-hook 'c-mode-hook 'flycheck-mode)
+  )
 
-(require 'flycheck-rtags)
-(defun nick/flycheck-rtags-setup ()
+(use-package flycheck-rtags
+  :after flycheck
+  :config
   (flycheck-select-checker 'rtags)
-  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-  (setq-local flycheck-check-syntax-automatically nil))
-;; c-mode-common-hook is also called by c++-mode
-(add-hook 'c-mode-common-hook #'nick/flycheck-rtags-setup)
+  (setq-local flycheck-highlighting-mode nil)
+  (setq-local flycheck-check-syntax-automatically nil)
+  )
 
 
-;;flycheck iroy
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(use-package flycheck-irony-setup
+  :after flycheck
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
+  )
+
 
 
 ;; ;;cmake ide
@@ -82,15 +95,12 @@
 (require 'rtags)
 (cmake-ide-setup)
 
-;;file formatting
-(require 'google-c-style)
-;;load formatting style
-(add-hook 'c-mode-common-hook 'google-set-c-style)
 
-(put 'upcase-region 'disabled nil)
-(setq x-select-enable-clipboard nil)
-(put 'narrow-to-region 'disabled nil)
-
+(use-package google-c-style
+  :load-path "~/.emacs.d/custom/"
+  :config
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  )
 
 
 
