@@ -48,14 +48,13 @@
 
 ;; company
 (use-package company
+  ;; :commands global-company-mode
+  ;; :bind
+  ;; (([(tab)] . company-complete))
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-idle-delay 0.2)
-
 )
-
-
-(add-to-list 'company-backend 'company-rtags)
 
 
 ;; set up c++
