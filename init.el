@@ -21,7 +21,7 @@
 ;;custom package repository
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://stable.melpa.org/packages/") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
 	     '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (package-initialize)
@@ -37,7 +37,10 @@
 
 ;;custom load path
 (add-to-list 'load-path "~/.emacs.d/custom/")
+(add-to-list 'load-path "~/.emacs.d/custom/packages/")
 
+;; set up ido
+(require 'ido-setup)
 
 ;; set up python
 (require 'python-setup)
@@ -49,8 +52,8 @@
 ;; company
 (use-package company
   ;; :commands global-company-mode
-  ;; :bind
-  ;; (([(tab)] . company-complete))
+  :bind
+  (([(tab)] . company-complete))
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-idle-delay 0.2)
@@ -60,14 +63,8 @@
 ;; set up c++
 (require 'cpp-setup)
 
-
-
-
-
-
 ;; linum mode if prog language
 (add-hook 'prog-mode-hook 'linum-mode)
-
 
 
 (put 'upcase-region 'disabled nil)

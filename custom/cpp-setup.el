@@ -98,18 +98,6 @@
   )
 
 
-
-
-
-
-;; ;; company bindings
-;; ;; not nice here, double check
-;; (define-key c-mode-map [(tab)] 'company-complete)
-;; (define-key c++-mode-map [(tab)] 'company-complete)
-
-
-
-
 ;; cmake ide
 (use-package cmake-ide
   :ensure t
