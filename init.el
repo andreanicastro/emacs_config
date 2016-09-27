@@ -48,6 +48,8 @@
 ;; setup org
 (require 'orgmode-setup)
 
+;; setup expand region
+(require 'expand-region-setup)
 
 ;; company
 (use-package company
