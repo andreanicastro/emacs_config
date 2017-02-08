@@ -7,7 +7,7 @@
   (setq org-log-done t) 
 
 
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
  
   (setq org-image-actual-width '(300))
 
