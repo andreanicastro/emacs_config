@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name:  ifndef
+# key: ifndf
+# --
+
+#ifndef ${1:Macro}
+#define ${1:$(yas-text)}
+$0
+#endif //${1:$(yas-text)}
