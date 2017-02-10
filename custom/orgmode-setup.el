@@ -18,7 +18,8 @@
   (setq org-agenda-files (list "~/Documents/notes/phd.org"
 			       "~/Documents/notes/life.org"
 			       "~/Documents/notes/meetings.org"
-			       "~/Documents/notes/papers.org"))
+			       "~/Documents/notes/papers.org"
+			       "~/Documents/notes/ideas.org"))
 
   (setq org-agenda-custom-commands
 	'(("A" todo "ACTIVE")
