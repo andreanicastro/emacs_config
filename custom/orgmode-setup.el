@@ -10,7 +10,7 @@
 
 
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
- 
+  
   (setq org-image-actual-width '(300))
 
   (setq org-todo-keywords
@@ -33,12 +33,42 @@
 	  ("p"          ; key
 	   "Paper"      ; name
 	   entry        ; type
-	   (file+headline "~/Documents/notes/references/papers.org" "Article") ; target
-	   "* %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
+	   (file+headline "~/Documents/notes/references/phd.org" "Relevant Literature") ; target
+	   "** %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
 	   :prepend t     ; property: add at the end
 	   :empty-lines 1 ; property: one blank line before and after the headline
 	   :created t     ; property
-	   ))
+	   )
+	  ("m"
+	   "Meeting"
+	   entry
+	   (file "~/Documents/notes/meetings.org")
+	   "* %U %(org-set-tags)\n** Content\n%?\n** Comments"  ; template
+					;:prepend t
+	   :empty-lines 1
+	   :created t
+	   )
+	  
+	  ("i"
+	   "Idea"
+	   entry
+	   (file "~/Documents/notes/ideas.org")
+	   "* %^{Title} :IDEAS: \n"  ; template
+	   :empty-lines 1
+	   :created t
+	   )
+	  
+	  ("l"
+	   "LifeTodo"
+	   entry
+	   (file+headline "~/Documents/notes/life.org" "todo list")
+	   "** TODO %^{Content} :LIFE: %^G \n"  ; template
+	   :created t
+	   )
+
+	  
+	  
+	  )
 	)
   )
 
