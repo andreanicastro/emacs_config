@@ -1,5 +1,7 @@
 ;; org mode setup
 
+(use-package interleave)
+
 (use-package org
   :config
   (define-key global-map "\C-cl" 'org-store-link)
@@ -33,7 +35,7 @@
 	  ("p"          ; key
 	   "Paper"      ; name
 	   entry        ; type
-	   (file+headline "~/Documents/notes/references/phd.org" "Relevant Literature") ; target
+	   (file+headline "~/Documents/notes/phd.org" "Relevant Literature") ; target
 	   "** %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
 	   :prepend t     ; property: add at the end
 	   :empty-lines 1 ; property: one blank line before and after the headline
