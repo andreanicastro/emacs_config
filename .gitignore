@@ -5,7 +5,7 @@ bin/
 lib/
 resources/
 gtest/build/
-
+elpa
 
 #ignore gtags files
 GPATH
