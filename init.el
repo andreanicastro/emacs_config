@@ -50,13 +50,13 @@
 (require 'ido-setup)
 
 ;; set up python
-(require 'python-setup)
+;; (require 'python-setup)			
 
 ;; setup org
 (require 'orgmode-setup)
 
 ;; setup expand region
-(require 'expand-region-setup)
+;; (require 'expand-region-setup) 
 
 ;; company
 (use-package company

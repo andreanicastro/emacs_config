@@ -4,6 +4,20 @@
 (add-to-list 'auto-mode-alist '("/eigen/Eigen/"  . c++-mode) t)
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
+
+(use-package company
+  ;; :commands global-company-mode
+  :bind
+  (:map
+   c-mode-map ([(tab)] . company-complete)
+   :map
+   c++-mode-map ([(tab)] . company-complete))
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0.1)
+)
+
+
 ;; set yasnippet
 (use-package yasnippet
   :load-path "~./.emacs.d/plugins/yasnippet"
