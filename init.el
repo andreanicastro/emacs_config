@@ -58,22 +58,10 @@
 ;; setup expand region
 ;; (require 'expand-region-setup) 
 
-;; company
-(use-package company
-  ;; :commands global-company-mode
-  :bind
-  (:map
-   c-mode-map ([(tab)] . company-complete)
-   :map
-   c++-mode-map ([(tab)] . company-complete))
-  :config
-  (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-idle-delay 0.1)
-)
 
 
 ;; set up c++
-(require 'cpp-setup)
+;; (require 'cpp-setup)
 
 ;; linum mode if prog language
 (add-hook 'prog-mode-hook 'linum-mode)
