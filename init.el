@@ -8,10 +8,11 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
+    (cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
  '(safe-local-variable-values
    (quote
-    ((cmake-ide-build-dir "build/")
+    ((cmake-idle-build-dir . "build/")
+     (cmake-ide-build-dir "build/")
      (cmake-ide-build-dir "./build/")
      (cmake-ide-build-dir . "build/")))))
 
@@ -56,12 +57,12 @@
 (require 'orgmode-setup)
 
 ;; setup expand region
-;; (require 'expand-region-setup) 
+(require 'expand-region-setup) 
 
 
 
 ;; set up c++
-;; (require 'cpp-setup)
+(require 'cpp-setup)
 
 ;; linum mode if prog language
 (add-hook 'prog-mode-hook 'linum-mode)
