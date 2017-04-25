@@ -1,19 +1,23 @@
+
 ;; cpp setup
 
 ;;force c++ mode on eigen and cuda
-(add-to-list 'auto-mode-alist '("/eigen/Eigen/"  . c++-mode) t)
+;; (add-to-list 'auto-mode-alist '("/eigen/Eigen/"  . c++-mode) t)
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
 
 (use-package company
-  ;; :commands global-company-mode
-  :bind
-  (:map
-   c-mode-map ([(tab)] . company-complete)
-   :map
-   c++-mode-map ([(tab)] . company-complete))
+  :ensure t
+  ;;:defer t
+  :init ( add-hook 'after-init-hook 'global-company-mode)
+  :bind ("C-;" . company-complete)
+  ;; (
+  ;;  ;; :map
+  ;;  ;; c-mode-map ([(tab)] . company-complete)
+  ;;  :map
+  ;;  c++-mode-map ([(tab)] . company-complete))
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
+  ;; (add-hook 'after-init-hook 'global-company-mode)
   (setq company-idle-delay 0.1)
 )
 
