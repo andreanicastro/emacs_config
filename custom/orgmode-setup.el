@@ -18,11 +18,11 @@
   (setq org-todo-keywords
 	'((sequence "TODO" "ACTIVE" "DONE")))
 
-  (setq org-agenda-files (list "~/Documents/notes/phd.org"
-			       "~/Documents/notes/life.org"
-			       "~/Documents/notes/meetings.org"
-			       "~/Documents/notes/papers.org"
-			       "~/Documents/notes/ideas.org"))
+  (setq org-agenda-files (list "~/notes/phd.org"
+			       "~/notes/life.org"
+			       "~/notes/meetings.org"
+			       "~/notes/papers.org"
+			       "~/notes/ideas.org"))
 
   (setq org-agenda-custom-commands
 	'(("A" todo "ACTIVE")
@@ -35,7 +35,7 @@
 	  ("p"          ; key
 	   "Paper"      ; name
 	   entry        ; type
-	   (file+headline "~/Documents/notes/phd.org" "Relevant Literature") ; target
+	   (file+headline "~/notes/phd.org" "Relevant Literature") ; target
 	   "** %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
 	   :prepend t     ; property: add at the end
 	   :empty-lines 1 ; property: one blank line before and after the headline
@@ -44,7 +44,7 @@
 	  ("m"
 	   "Meeting"
 	   entry
-	   (file "~/Documents/notes/meetings.org")
+	   (file "~/notes/meetings.org")
 	   "* %U %(org-set-tags)\n** Content\n%?\n** Comments"  ; template
 					;:prepend t
 	   :empty-lines 1
@@ -54,7 +54,7 @@
 	  ("i"
 	   "Idea"
 	   entry
-	   (file "~/Documents/notes/ideas.org")
+	   (file "~/notes/ideas.org")
 	   "* %^{Title} :IDEAS: \n"  ; template
 	   :empty-lines 1
 	   :created t
@@ -63,7 +63,7 @@
 	  ("l"
 	   "LifeTodo"
 	   entry
-	   (file+headline "~/Documents/notes/life.org" "todo list")
+	   (file+headline "~/notes/life.org" "todo list")
 	   "** TODO %^{Content} :LIFE: %^G \n"  ; template
 	   :created t
 	   )
@@ -77,18 +77,18 @@
 
 (use-package org-ref
   :config
-  (setq org-ref-bibliography-notes "~/Documents/notes/references/notes"
-	org-ref-bibliography-notes "~/Documents/notes/references/papers.org"
-	org-ref-default-bibliography '("~/Documents/notes/references/papers.bib")
-	org-ref-pdf-directory "~/Documents/notes/references/pdfs/")
+  (setq org-ref-bibliography-notes "~/notes/references/notes"
+	org-ref-bibliography-notes "~/notes/references/papers.org"
+	org-ref-default-bibliography '("~/notes/references/papers.bib")
+	org-ref-pdf-directory "~/notes/references/pdfs/")
   )
 
 
 (use-package helm-bibtex
   :config
-  (setq helm-bibtex-bibliography "~/Documents/notes/references/papers.bib"
-	helm-bibtex-library-path "~/Documents/notes/references/pdfs"
-	helm-bibtex-notes-path "~/Documents/notes/references/papers.org")
+  (setq helm-bibtex-bibliography "~/notes/references/papers.bib"
+	helm-bibtex-library-path "~/notes/references/pdfs"
+	helm-bibtex-notes-path "~/notes/references/papers.org")
   )
 
 (provide 'orgmode-setup)
