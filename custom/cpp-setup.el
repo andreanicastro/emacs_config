@@ -22,6 +22,14 @@
 )
 
 
+(use-package helm-company
+  :ensure t
+  :after company
+  :config
+  (define-key company-mode-map (kbd "C-:") 'helm-company)
+  (define-key company-active-map (kbd "C-:") 'helm-company)
+  )
+
 ;; set yasnippet
 (use-package yasnippet
   :load-path "~./.emacs.d/plugins/yasnippet"
