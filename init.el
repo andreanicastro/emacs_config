@@ -8,7 +8,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
+    (org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
  '(safe-local-variable-values
    (quote
     ((cmake-idle-build-dir . "build/")

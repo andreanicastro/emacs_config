@@ -76,6 +76,7 @@
 
 
 (use-package org-ref
+  :ensure t
   :config
   (setq org-ref-bibliography-notes "~/notes/references/notes"
 	org-ref-bibliography-notes "~/notes/references/papers.org"
