@@ -32,6 +32,7 @@
 
 ;; set yasnippet
 (use-package yasnippet
+  :ensure t
   :load-path "~./.emacs.d/plugins/yasnippet"
   :commands (yas-minor-mode)
   :init
