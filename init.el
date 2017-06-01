@@ -50,6 +50,13 @@
 ;; set up ido
 ;; (require 'ido-setup)
 
+;; set up helm
+(use-package helm
+	     :ensure t
+	     :config
+	     (require 'helm-config)
+	     )
+
 ;; set up python
 ;; (require 'python-setup)			
 
