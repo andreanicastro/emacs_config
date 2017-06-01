@@ -26,6 +26,7 @@
 (set-face-attribute 'default nil :height 100)
 
 
+
 ;;custom package repository
 (require 'package)
 (add-to-list 'package-archives
@@ -46,6 +47,14 @@
 ;;custom load path
 (add-to-list 'load-path "~/.emacs.d/custom/")
 (add-to-list 'load-path "~/.emacs.d/custom/packages/")
+
+
+;; load conf for lisp 
+(with-eval-after-load 'lisp-mode
+  (require 'company-setup)
+  (require 'expand-region-setup)
+  )
+
 
 ;; set up ido
 ;; (require 'ido-setup)
@@ -68,12 +77,14 @@
 (require 'orgmode-setup)
 
 ;; setup expand region
-(require 'expand-region-setup) 
 
 
+(with-eval-after-load 'cc-mode
+  (load 'cpp-setup))
+  
 
 ;; set up c++
-(require 'cpp-setup)
+;; (require 'cpp-setup)
 
 ;; linum mode if prog language
 (add-hook 'prog-mode-hook 'linum-mode)
