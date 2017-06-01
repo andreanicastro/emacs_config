@@ -46,13 +46,13 @@
 
 
 ;; rtags for tags based on clang
-(use-package rtags
-  :ensure t
-  :config
-  (setq rtags-completions-enabled t
-	rtags-autostart-diagnostics t
-	rtags-use-helm t)
-  (rtags-enable-standard-keybindings)
+;; (use-package rtags
+;;   :ensure t
+;;   :config
+;;   (setq rtags-completions-enabled t
+;; 	rtags-autostart-diagnostics t
+;; 	rtags-use-helm t)
+;;   (rtags-enable-standard-keybindings)
 
 ;; (eval-after-load 'cc-mode
 ;;   '(progn
@@ -88,14 +88,14 @@
 ;;              ("T" . rtags-taglist)))))
 
   
-)
+;;)
 
 ;; rtags based backend for company
-(use-package company-rtags
-  :after rtags company
-  :config
-  (add-to-list 'company-backends 'company-rtags)
-  )
+;; (use-package company-rtags
+;;   :after rtags company
+;;   :config
+;;   (add-to-list 'company-backends 'company-rtags)
+;;   )
 
 
 ;; irony based backend for company
@@ -135,30 +135,30 @@
 
 
 ;; flycheck
-(use-package flycheck
-  :ensure t
-  :commands (flycheck-mode)
-  :init
-  (add-hook 'c++-mode-hook 'flycheck-mode)
-  (add-hook 'c-mode-hook 'flycheck-mode)
-  )
+;; (use-package flycheck
+;;   :ensure t
+;;   :commands (flycheck-mode)
+;;   :init
+;;   (add-hook 'c++-mode-hook 'flycheck-mode)
+;;   (add-hook 'c-mode-hook 'flycheck-mode)
+;;   )
 ;; set up the flycheck interface with rtags
-(use-package  flycheck-rtags
-  :after flycheck
-  :ensure rtags
-  :config 
-  (flycheck-select-checker 'rtags)
-  (setq-local flycheck-highlighting-mode nil)
-  (setq-local flycheck-check-syntax-automatically nil)
-  )
+;; (use-package  flycheck-rtags
+;;   :after flycheck
+;;   :ensure rtags
+;;   :config 
+;;   (flycheck-select-checker 'rtags)
+;;   (setq-local flycheck-highlighting-mode nil)
+;;   (setq-local flycheck-check-syntax-automatically nil)
+;;   )
 
 
 ;; set up the flycheck interface with irony
-(use-package flycheck-irony-setup
-  :after flycheck irony
-  :config  
-  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
-  )
+;; (use-package flycheck-irony-setup
+;;   :after flycheck irony
+;;   :config  
+;;   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
+;;   )
 
 
 ;; cmake ide
