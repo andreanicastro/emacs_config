@@ -48,7 +48,7 @@
 (add-to-list 'load-path "~/.emacs.d/custom/packages/")
 
 ;; set up ido
-(require 'ido-setup)
+;; (require 'ido-setup)
 
 ;; set up python
 ;; (require 'python-setup)			
