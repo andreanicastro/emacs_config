@@ -5,6 +5,9 @@
 ;; (add-to-list 'auto-mode-alist '("/eigen/Eigen/"  . c++-mode) t)
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
+(load-theme 'manoj-dark)
+ ;; '(custom-enabled-themes (quote (manoj-dark)))
+
 ;; load expand region setup
 (require 'expand-region-setup) 
 

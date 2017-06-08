@@ -74,13 +74,14 @@
 ;; (require 'python-setup)			
 
 ;; setup org
-(require 'orgmode-setup)
+(with-eval-after-load 'org-mode
+  (require 'orgmode-setup))
 
 ;; setup expand region
 
 
 (with-eval-after-load 'cc-mode
-  (load 'cpp-setup))
+  (require 'cpp-setup))
   
 
 ;; set up c++
