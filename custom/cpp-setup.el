@@ -5,54 +5,102 @@
 ;; (add-to-list 'auto-mode-alist '("/eigen/Eigen/"  . c++-mode) t)
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
+(load-theme 'manoj-dark)
+ ;; '(custom-enabled-themes (quote (manoj-dark)))
 
-(use-package company
+;; load expand region setup
+(require 'expand-region-setup) 
+
+;; load company
+(require 'company-setup)
+
+
+;; load yasnippet 
+(require 'yasnippet-setup)
+
+
+
+;; irony mode for c++
+(use-package irony
   :ensure t
-  ;;:defer t
-  :init ( add-hook 'after-init-hook 'global-company-mode)
-  :bind ("C-;" . company-complete)
-  ;; (
-  ;;  ;; :map
-  ;;  ;; c-mode-map ([(tab)] . company-complete)
-  ;;  :map
-  ;;  c++-mode-map ([(tab)] . company-complete))
+  :commands (irony-mode)
+  :init
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
   :config
-  ;; (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-idle-delay 0.1)
+  ;; check correctness
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 )
 
 
-(use-package helm-company
+
+;; irony based backend for company
+(use-package company-irony
   :ensure t
-  :after company
+  :after company irony
   :config
-  (define-key company-mode-map (kbd "C-:") 'helm-company)
-  (define-key company-active-map (kbd "C-:") 'helm-company)
+  (add-to-list 'company-backends 'company-irony)
+  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
   )
 
-;; set yasnippet
-(use-package yasnippet
-  :load-path "~./.emacs.d/plugins/yasnippet"
-  :commands (yas-minor-mode)
+
+;; irony based backend for company to complete headers
+(use-package company-irony-c-headers
+  :after company irony
+  :config
+  (add-to-list 'company-backends 'company-irony-c-headers)
+  )
+
+
+  ;; cmake ide
+(use-package cmake-ide
+  :ensure t
+  :config
+  (cmake-ide-setup)
+  )
+
+;; custom c++ style for autoindentation
+(use-package google-c-style
+  :load-path "~/.emacs.d/custom/"
+  :config
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  )
+
+;; set the character limit line
+(use-package fill-column-indicator
+  :ensure t
+  :commands (fci-mode)
   :init
-  (setq yas-snippet-dir
-	'("~/.emacs.d/snippets"))
-  (progn (add-hook 'prog-mode-hook #'yas-minor-mode))
+  (add-hook 'c-mode-hook 'fci-mode)
+  (add-hook 'c++-mode-hook 'fci-mode)
   :config
-  (yas-reload-all)
-  )
+  ;; 120 char of limit
+  (setq fci-rule-column 120)
+  
+  ;; workaround to avoid intereference with company
+  (defun on-off-fci-before-company(command)
+  (when (string= "show" command)
+    (turn-off-fci-mode))
+  (when (string= "hide" command)
+    (turn-on-fci-mode)))
 
+  (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
+)  
 
 
 
 ;; rtags for tags based on clang
-(use-package rtags
-  :ensure t
-  :config
-  (setq rtags-completions-enabled t
-	rtags-autostart-diagnostics t
-	rtags-use-helm t)
-  (rtags-enable-standard-keybindings)
+;; (use-package rtags
+;;   :ensure t
+;;   :config
+;;   (setq rtags-completions-enabled t
+;; 	rtags-autostart-diagnostics t
+;; 	rtags-use-helm t)
+;;   (rtags-enable-standard-keybindings)
 
 ;; (eval-after-load 'cc-mode
 ;;   '(progn
@@ -88,112 +136,44 @@
 ;;              ("T" . rtags-taglist)))))
 
   
-)
+;;)
 
 ;; rtags based backend for company
-(use-package company-rtags
-  :after rtags company
-  :config
-  (add-to-list 'company-backends 'company-rtags)
-  )
+;; (use-package company-rtags
+;;   :after rtags company
+;;   :config
+;;   (add-to-list 'company-backends 'company-rtags)
+;;   )
 
 
-;; irony based backend for company
-(use-package company-irony
-  :ensure t
-  :after company
-  :config
-  (add-to-list 'company-backends 'company-irony)
-  (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-  )
-
-
-;; irony based backend for company to complete headers
-(use-package company-irony-c-headers
-  :after company
-  :config
-  (add-to-list 'company-backends 'company-irony-c-headers)
-  )
-
-
-  
-;; irony mode for c++
-(use-package irony
-  :ensure t
-  :commands (irony-mode)
-  :init
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  :config
-  ;; check correctness
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-)
 
 
 ;; flycheck
-(use-package flycheck
-  :ensure t
-  :commands (flycheck-mode)
-  :init
-  (add-hook 'c++-mode-hook 'flycheck-mode)
-  (add-hook 'c-mode-hook 'flycheck-mode)
-  )
+;; (use-package flycheck
+;;   :ensure t
+;;   :commands (flycheck-mode)
+;;   :init
+;;   (add-hook 'c++-mode-hook 'flycheck-mode)
+;;   (add-hook 'c-mode-hook 'flycheck-mode)
+;;   )
 ;; set up the flycheck interface with rtags
-(use-package  flycheck-rtags
-  :after flycheck
-  :ensure rtags
-  :config 
-  (flycheck-select-checker 'rtags)
-  (setq-local flycheck-highlighting-mode nil)
-  (setq-local flycheck-check-syntax-automatically nil)
-  )
+;; (use-package  flycheck-rtags
+;;   :after flycheck
+;;   :ensure rtags
+;;   :config 
+;;   (flycheck-select-checker 'rtags)
+;;   (setq-local flycheck-highlighting-mode nil)
+;;   (setq-local flycheck-check-syntax-automatically nil)
+;;   )
 
 
 ;; set up the flycheck interface with irony
-(use-package flycheck-irony-setup
-  :after flycheck irony
-  :config  
-  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
-  )
+;; (use-package flycheck-irony-setup
+;;   :after flycheck irony
+;;   :config  
+;;   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)
+;;   )
 
 
-;; cmake ide
-(use-package cmake-ide
-  :ensure t
-  :config
-  (cmake-ide-setup)
-  )
-
-;; custom c++ style for autoindentation
-(use-package google-c-style
-  :load-path "~/.emacs.d/custom/"
-  :config
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  )
-
-;; set the character limit line
-(use-package fill-column-indicator
-  :ensure t
-  :commands (fci-mode)
-  :init
-  (add-hook 'c-mode-hook 'fci-mode)
-  (add-hook 'c++-mode-hook 'fci-mode)
-  :config
-  ;; 120 char of limit
-  (setq fci-rule-column 120)
-  
-  ;; workaround to avoid intereference with company
-  (defun on-off-fci-before-company(command)
-  (when (string= "show" command)
-    (turn-off-fci-mode))
-  (when (string= "hide" command)
-    (turn-on-fci-mode)))
-
-  (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
-)  
 
 (provide 'cpp-setup)

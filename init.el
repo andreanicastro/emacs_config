@@ -26,6 +26,7 @@
 (set-face-attribute 'default nil :height 100)
 
 
+
 ;;custom package repository
 (require 'package)
 (add-to-list 'package-archives
@@ -47,22 +48,44 @@
 (add-to-list 'load-path "~/.emacs.d/custom/")
 (add-to-list 'load-path "~/.emacs.d/custom/packages/")
 
+
+;; load conf for lisp 
+(with-eval-after-load 'lisp-mode
+  (require 'company-setup)
+  (require 'expand-region-setup)
+  )
+
+
 ;; set up ido
-(require 'ido-setup)
+;; (require 'ido-setup)
+
+;; set up helm
+(use-package helm
+  :ensure t
+  :config
+  (require 'helm-config)
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+  (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (helm-mode 1)
+  )
 
 ;; set up python
 ;; (require 'python-setup)			
 
 ;; setup org
-(require 'orgmode-setup)
+(with-eval-after-load 'org-mode
+  (require 'orgmode-setup))
 
 ;; setup expand region
-(require 'expand-region-setup) 
 
 
+(with-eval-after-load 'cc-mode
+  (require 'cpp-setup))
+  
 
 ;; set up c++
-(require 'cpp-setup)
+;; (require 'cpp-setup)
 
 ;; linum mode if prog language
 (add-hook 'prog-mode-hook 'linum-mode)
