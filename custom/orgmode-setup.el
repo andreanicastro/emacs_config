@@ -67,8 +67,6 @@
 	   "** TODO %^{Content} :LIFE: %^G \n"  ; template
 	   :created t
 	   )
-
-	  
 	  
 	  )
 	)
@@ -82,6 +80,8 @@
 	org-ref-bibliography-notes "~/notes/references/papers.org"
 	org-ref-default-bibliography '("~/notes/references/papers.bib")
 	org-ref-pdf-directory "~/notes/references/pdfs/")
+
+  (setq org-ref-note-title-format "* %y - %t\n :PROPERTIES:\n  :Custom_ID: %k\n  :AUTHOR: %9a\n  :JOURNAL: %j\n  :YEAR: %y\n  :VOLUME: %v\n  :PAGES: %p\n  :DOI: %D\n  :URL: %U\n :INTERLEAVE_PDF: ./pdfs/%k.pdf\n :END:\n\n") 
   )
 
 
@@ -90,6 +90,12 @@
   (setq helm-bibtex-bibliography "~/notes/references/papers.bib"
 	helm-bibtex-library-path "~/notes/references/pdfs"
 	helm-bibtex-notes-path "~/notes/references/papers.org")
+
+  (defun my/org-ref-notes-function (candidates)
+    (let ((key (helm-marked-candidates)))
+      (funcall org-ref-notes-function (car key))))
+  (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
+  (helm-add-action-to-source "Edit notes" 'my/org-ref-notes-function helm-source-bibtex 7)
   )
 
 (provide 'orgmode-setup)
