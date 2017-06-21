@@ -8,7 +8,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
+    (interleave lua-mode org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
  '(safe-local-variable-values
    (quote
     ((cmake-idle-build-dir . "build/")
@@ -72,9 +72,12 @@
 
 ;; set up python
 ;; (require 'python-setup)			
+(with-eval-after-load 'python-mode
+  (require 'python-setup))
+
 
 ;; setup org
-(with-eval-after-load 'org-mode
+(with-eval-after-load 'org
   (require 'orgmode-setup))
 
 ;; setup expand region
