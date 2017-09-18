@@ -37,6 +37,26 @@
   )
   
 
+;; set the character limit line
+(use-package fill-column-indicator
+  :ensure t
+  :commands (fci-mode)
+  :init
+  (add-hook 'python-mode-hook 'fci-mode)
+  :config
+  ;; 80 char of limit
+  (setq fci-rule-column 80)
+  
+  ;; workaround to avoid intereference with company
+  (defun on-off-fci-before-company(command)
+  (when (string= "show" command)
+    (turn-off-fci-mode))
+  (when (string= "hide" command)
+    (turn-on-fci-mode)))
+
+  (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
+)  
+
 
 
 
