@@ -8,7 +8,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (interleave lua-mode org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
+    (company-jedi neotree interleave lua-mode org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
  '(safe-local-variable-values
    (quote
     ((cmake-idle-build-dir . "build/")
@@ -70,9 +70,14 @@
   (helm-mode 1)
   )
 
+(use-package neotree
+  :ensure t
+  :config
+  (global-set-key [f8] 'neotree-toggle))
+
 ;; set up python
 ;; (require 'python-setup)			
-(with-eval-after-load 'python-mode
+(with-eval-after-load 'python
   (require 'python-setup))
 
 
