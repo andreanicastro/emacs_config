@@ -14,6 +14,7 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
   
   (setq org-image-actual-width '(300))
+  (setq org-highlight-latex-and-related '(latex))
 
   (setq org-todo-keywords
 	'((sequence "TODO" "ACTIVE" "DONE")))
