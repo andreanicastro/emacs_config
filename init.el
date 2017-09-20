@@ -8,7 +8,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (company-jedi neotree interleave lua-mode org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
+    (evil company-jedi neotree interleave lua-mode org-ref yasnippet company helm-company cmake-mode fill-column-indicator cmake-ide flycheck company-irony rtags use-package expand-region elpy)))
  '(safe-local-variable-values
    (quote
     ((cmake-idle-build-dir . "build/")
@@ -44,6 +44,7 @@
 (windmove-default-keybindings)
 
 
+
 ;;custom load path
 (add-to-list 'load-path "~/.emacs.d/custom/")
 (add-to-list 'load-path "~/.emacs.d/custom/packages/")
@@ -69,6 +70,14 @@
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
   (helm-mode 1)
   )
+
+;; evil mode
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1)			;
+  )
+
 
 (use-package neotree
   :ensure t
