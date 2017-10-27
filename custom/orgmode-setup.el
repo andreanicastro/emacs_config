@@ -61,15 +61,22 @@
   ;; org capture templates
   (setq org-capture-templates
 	'(
-	  ("p"          ; key
-	   "Paper"      ; name
-	   entry        ; type
-	   (file+headline "~/notes/thesis.org" "Relevant Literature") ; target
-	   "** %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
-	   :prepend t     ; property: add at the end
-	   :empty-lines 1 ; property: one blank line before and after the headline
-	   :created t     ; property
-	   )
+	 ; ("p"          ; key
+	 ;  "Paper"      ; name
+	 ;  entry        ; type
+	 ;  (file+headline "~/notes/thesis.org" "Relevant Literature") ; target
+	 ;  "** %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
+	 ;  :prepend t     ; property: add at the end
+	 ;  :empty-lines 1 ; property: one blank line before and after the headline
+	 ;  :created t     ; property
+	 ;  )
+	 ("s"
+	  "Study"
+	  entry 
+	  (file+headline "~/notes/study.org" "Study")
+	  "** %^{Matter} :STUDY:%(org-set-tags)"
+	  :created t
+	  )
 	  ("m"
 	   "Meeting"
 	   entry
@@ -88,14 +95,22 @@
 	   :empty-lines 1
 	   :created t
 	   )
-	  
-	  ("l"
-	   "LifeTodo"
-	   entry
-	   (file+headline "~/notes/life.org" "todo list")
-	   "** TODO %^{Content} :LIFE: %^G \n"  ; template
-	   :created t
-	   )
+	 ("t"
+	  "Todo"
+	  entry
+	  (file+headline "~/notes/todo.org" "Tasks")
+	  "** TODO %^{Content} %(org-set-tags)"
+	  :prepend t
+	  :created t
+	  )
+
+	  ;("l"
+	  ; "LifeTodo"
+	  ; entry
+	  ; (file+headline "~/notes/life.org" "todo list")
+	  ; "** TODO %^{Content} :LIFE: %^G \n"  ; template
+	  ; :created t
+	  ; )
 	  
 	  )
 	)
