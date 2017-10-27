@@ -47,7 +47,7 @@
   (setq org-todo-keywords
 	'((sequence "TODO" "ACTIVE" "DONE")))
 
-  (setq org-agenda-files (list "~/notes/phd.org"
+  (setq org-agenda-files (list "~/notes/thesis.org"
 			       "~/notes/life.org"
 			       "~/notes/meetings.org"
 			       "~/notes/papers.org"
@@ -64,7 +64,7 @@
 	  ("p"          ; key
 	   "Paper"      ; name
 	   entry        ; type
-	   (file+headline "~/notes/phd.org" "Relevant Literature") ; target
+	   (file+headline "~/notes/thesis.org" "Relevant Literature") ; target
 	   "** %^{Title} %(org-set-tags)  :article: \n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i\nBrief description:\n%?"  ; template
 	   :prepend t     ; property: add at the end
 	   :empty-lines 1 ; property: one blank line before and after the headline
