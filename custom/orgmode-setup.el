@@ -91,7 +91,7 @@
 	   "Idea"
 	   entry
 	   (file "~/notes/ideas.org")
-	   "* %^{Title} :IDEAS: \n"  ; template
+	   "* %^{Title} :IDEAS:%(org-set-tags) \n"  ; template
 	   :empty-lines 1
 	   :created t
 	   )
@@ -103,7 +103,13 @@
 	  :prepend t
 	  :created t
 	  )
-
+	 ("q"
+	  "Question"
+	  entry
+	  (file "~/notes/questions.org")
+	  "** TODO %^{Question} %(org-set-tags)"
+	  :created t
+	  )
 	  ;("l"
 	  ; "LifeTodo"
 	  ; entry
