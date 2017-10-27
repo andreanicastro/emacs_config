@@ -5,7 +5,10 @@ bin/
 lib/
 resources/
 gtest/build/
+bookmarks
 elpa
+ido.last
+irony
 
 #ignore gtags files
 GPATH
@@ -18,6 +21,12 @@ GTAGS
 */**/*~
 */**/#*
 */**/.#*
+\#*
+*.swp
+*/**/*.swp
+session.*
+
+
 
 #qtcreator files
 *.user
