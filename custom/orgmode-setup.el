@@ -51,7 +51,8 @@
 			       "~/notes/life.org"
 			       "~/notes/meetings.org"
 			       "~/notes/papers.org"
-			       "~/notes/ideas.org"))
+			       "~/notes/ideas.org"
+			       "~/notes/thoughts.org"))
 
   (setq org-agenda-custom-commands
 	'(("A" todo "ACTIVE")
@@ -86,6 +87,15 @@
 	   :empty-lines 1
 	   :created t
 	   )
+	  ("b"
+	   "Bad Thought"
+	   entry
+	   (file "~/notes/thoughts.org")
+	   "* %U %^{THOUGHT}\n ** SITUATION \n(What happened? Where? When? Who with? How?) \n** EMOTION MOODS \n(rate 0-100%, What emotion did I feel at that time? What else? How intense was it?) \n**PHYSICAL sensation and reaction \n(What did I notice in my body? What whould other notics about me?) \n** UNHELPFUL THOUGHT IMAGES \n(What went through my mind? What disturbed me? What did those thoughts/images/ memories mean to me, or say about me or the situation? WHat I am responding to? What button is this pressing for me? What would be the worst thing about that? Am I over-estimating the danger? Am I unde-estimating my ability to cope? Is this fact or opinion?) \n** ALTERNATIVE REALISTIC THOUGHT. MORE BALANCED PERSPECTIVE \n(STOP, take a breath. WHat would someone else say about this situation? What's the bigger picture? Is there another way of seeing it? What advice would I give someone else in this situation?) \n** WHAT I DID? WHAT I COULD DO? WHAT IS THE BEST RESPOSE? \n(What will the consequences of my action be? Do what works! Act wisely. What will be the most helful for me, for others, or the situation? What could I do differently? What would be more effective? \** QUESTIONS TO BE ANSWERED: \n*** Is there a substantial evidence for my thought? \n*** Is there evidence contrary to my thought? \n*** Am I attempting to interpret this situation without all the evidence? \n*** What would a friend think about this situation? \n*** If I look a the situation positively, how is it different? \n*** Will this matter a year from now? How about five years from now? "
+	   :empyt-lines 1
+	   :created t
+	   )
+	  
 	  
 	  ("i"
 	   "Idea"
